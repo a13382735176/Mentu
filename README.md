@@ -1,2 +1,10 @@
 # "A log anomaly detector based on XLSTM and reconstruction error."
----
+The goal of log anomaly detection is to accurately distinguish between normal and anomalous logs. However, due to the highly imbalanced distribution of normal and anomalous logs in publicly available datasets (HDFS: 2.93%, Spirit: 15.29%, Thunderbird: 0.49%, BGL: 7.34%), many log anomaly detectors tend to report inflated metrics (F1 scores over 0.9). While these detectors perform well in identifying positive samples, they often struggle to effectively recognize negative samples. **In Hoang's paper**, "**How Far Are We**?", when advanced detectors are evaluated using fixed windows and session-based segmentation, many issues arise, primarily because the positive-to-negative sample ratio becomes more balanced under these conditions, increasing the detection difficulty.
+
+This observation leads us to consider whether it's possible to design an anomaly detector that maintains robust generalization performance even when the positive-to-negative sample ratio is more balanced, as in session-based or fixed-length segmentation. To address this, we have developed an anomaly diagnosis mechanism that not only significantly improves detection accuracy in high-fault-rate scenarios but also automates the precise threshold search, **eliminating the need for tedious manual tuning**.
+
+Specifically, we select a subset of log blocks from the training set and store them in a **container**. Then, we compare each log block under inspection with those in the container using cosine similarity. The **top-k** most similar log blocks are chosen, and a probability value is generated based on this comparison. Following this, we use an XLSTM model to calculate the **reconstruction error**. We then apply additive attention to combine the **probability value and the reconstruction error**, creating a threshold objective function. Finally, we search for the optimal threshold within this objective function and apply it to the test set. Experimental results have demonstrated the effectiveness of this method.
+
+# Work flow
+![image](https://github.com/user-attachments/assets/62ab3c35-5c9c-46c2-bdaf-153513e9e42c)
+
