@@ -6,5 +6,11 @@ This observation leads us to consider whether it's possible to design an anomaly
 Specifically, we select a subset of log blocks from the training set and store them in a **container**. Then, we compare each log block under inspection with those in the container using cosine similarity. The **top-k** most similar log blocks are chosen, and a probability value is generated based on this comparison. Following this, we use an XLSTM model to calculate the **reconstruction error**. We then apply additive attention to combine the **probability value and the reconstruction error**, creating a threshold objective function. Finally, we search for the optimal threshold within this objective function and apply it to the test set. Experimental results have demonstrated the effectiveness of this method.
 
 # Work flow
-![image](https://github.com/user-attachments/assets/62ab3c35-5c9c-46c2-bdaf-153513e9e42c)
+![image](https://github.com/user-attachments/assets/fc405aed-28e8-40fb-97b8-f7b941036ce4)
+Specifically, after segmenting the log blocks by fixed length or session, for each log block (assuming a fixed length of 20), we take blockid 1 as an example. We only use the "Content" column and input it into the Roberta model for encoding. Similarly, for blockid 1, we use the "Eventlist" column, apply TF-IDF for encoding, and pass the encoded result to the Xlstm model.
+
+# Setup
+The environment only needs to ensure that Python is greater than **3.11** and **xlstm==1.0.3**. The rest of the environment should be automatically installed on the server. Special attention is required for CUDA (I used versions **11.8 and 12.2**, both of which work).
+
+
 
