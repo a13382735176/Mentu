@@ -10,7 +10,29 @@ Specifically, we select a subset of log blocks from the training set and store t
 Specifically, after segmenting the log blocks by fixed length or session, for each log block (assuming a fixed length of 20), we take blockid 1 as an example. We only use the "Content" column and input it into the Roberta model for encoding. Similarly, for blockid 1, we use the "Eventlist" column, apply TF-IDF for encoding, and pass the encoded result to the Xlstm model.
 
 # Setup
-The environment only needs to ensure that Python is greater than **3.11** and **xlstm==1.0.3**. The rest of the environment should be automatically installed on the server. Special attention is required for CUDA (I used versions **11.8 and 12.2**, both of which work).
+The environment only needs to ensure that Python is greater than **3.11** and **xlstm==1.0.3** and torch==2.3.1+cu118. The rest of the environment should be automatically installed on the server. Special attention is required for CUDA (I used versions **11.8 and 12.2**, both of which work).
+# Table of Contents
+![image](https://github.com/user-attachments/assets/3a498686-120d-4a5a-8b69-cd538ef5b333)
 
+If you want to run the HDFS experiment, please open the  "**deal_with_hdfs" file in the "bert_sematic**" folder and run. I’ve already completed the Roberta encoding, so it can be run with a single command. You just need to update the file path.
+   **detect anomaly in Tb Sp BGL with no translated event.py**，This is for performing anomaly detection on three other datasets.
+   The "**BGL and Tb spirit slice with no translated content.py**" script is used for fixed-length segmentation of the datasets, which is a preprocessing step. However, you don’t need to run it, as I’ve already completed the segmentation.
+    Thank you.
 
+# Usage
+```
+data_path = '/root/try pretrained/dataset/preprocessed/Spirit/200l_Spirit.csv' 
+if os.path.exists(data_path):
+    data = pd.read_csv(data_path)
+else:
+    raise FileNotFoundError("Data file does not exist")
 
+data['Status'] = data['Status'].apply(lambda x: 1 if x == 'success' else 0)
+tokenizer = RobertaTokenizer.from_pretrained('/root/try pretrained/pretrained_models/roberta-base')
+roberta_model = RobertaModel.from_pretrained('/root/try pretrained/pretrained_models/roberta-base')
+roberta_model = roberta_model.to(device)
+
+embeddings_path = '/root/try pretrained/dataset/preprocessed/Spirit/200l_dim400_embeddings with no translated.npy```
+
+# You only need to replace `data_path` and `embedding_path` to run the experiment and observe the results under different segmentation lengths.
+---
