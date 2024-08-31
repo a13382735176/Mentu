@@ -36,3 +36,9 @@ embeddings_path = '/root/try pretrained/dataset/preprocessed/Spirit/200l_dim400_
 
 # You only need to replace `data_path` and `embedding_path` to run the experiment and observe the results under different segmentation lengths.
 ---
+# Dataset
+https://figshare.com/articles/thesis/dataset_zip/26885611?file=48909394
+
+"**After extracting the dataset file, simply drag it into the directory.**"
+
+![image](https://github.com/user-attachments/assets/cb53493f-238f-44a1-b5d2-a3a1c249625e)
