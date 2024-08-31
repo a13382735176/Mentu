@@ -32,13 +32,13 @@ tokenizer = RobertaTokenizer.from_pretrained('/root/try pretrained/pretrained_mo
 roberta_model = RobertaModel.from_pretrained('/root/try pretrained/pretrained_models/roberta-base')
 roberta_model = roberta_model.to(device)
 
-embeddings_path = '/root/try pretrained/dataset/preprocessed/Spirit/200l_dim400_embeddings with no translated.npy```
-
+embeddings_path = '/root/try pretrained/dataset/preprocessed/Spirit/200l_dim400_embeddings with no translated.npy
+```
 # You only need to replace `data_path` and `embedding_path` to run the experiment and observe the results under different segmentation lengths.
 ---
 # Dataset
 https://figshare.com/articles/thesis/dataset_zip/26885611?file=48909394
 
 "**After extracting the dataset file, simply drag it into the directory.**"
+![23b4a343-7823-4984-a809-4dc4cc3b451f](https://github.com/user-attachments/assets/18e4f719-9950-4089-a663-e313176f7373)
 
-![image](https://github.com/user-attachments/assets/cb53493f-238f-44a1-b5d2-a3a1c249625e)
